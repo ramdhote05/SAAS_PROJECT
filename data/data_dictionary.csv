@@ -1,0 +1,32 @@
+file,column,description,notes
+customers.csv,customer_id,Unique synthetic customer key,Primary key
+customers.csv,signup_date,Date customer signed up,
+customers.csv,country,Customer country,
+customers.csv,company_size,Employee-count band,
+customers.csv,acquisition_channel,"Paid Search, Organic, Referral, Email, or Social",Join to marketing_spend.channel
+subscriptions.csv,subscription_id,Unique subscription record key,Primary key
+subscriptions.csv,customer_id,Customer who owns subscription,Foreign key to customers.customer_id
+subscriptions.csv,plan,"Basic, Pro, or Enterprise",
+subscriptions.csv,billing_cycle,monthly or annual,
+subscriptions.csv,price,Contracted charge per billing cycle,Annual price should be divided by 12 for MRR normalization
+subscriptions.csv,start_date,Subscription start date,
+subscriptions.csv,end_date,Cancellation/end date; blank for active subscriptions,
+subscriptions.csv,status,active or cancelled,
+payments.csv,payment_id,Unique payment attempt key,Primary key
+payments.csv,subscription_id,Subscription being charged,Foreign key to subscriptions.subscription_id
+payments.csv,amount,Amount attempted/refunded,
+payments.csv,payment_date,Payment attempt date,
+payments.csv,payment_status,"success, failed, or refunded",
+marketing_spend.csv,month,Calendar month in YYYY-MM format,
+marketing_spend.csv,channel,Marketing acquisition channel,
+marketing_spend.csv,spend,Monthly channel spend in synthetic currency units (USD-style),
+usage_engagement.csv,customer_id,Customer whose usage is measured,Foreign key to customers.customer_id
+usage_engagement.csv,month,Activity month in YYYY-MM format,
+usage_engagement.csv,logins,Number of logins during month,
+usage_engagement.csv,features_used,Distinct feature count proxy during month,
+usage_engagement.csv,support_tickets,Number of support tickets during month,
+plan_changes.csv,plan_change_id,Unique plan-change event key,Primary key
+plan_changes.csv,subscription_id,Subscription that changed plan,Foreign key to subscriptions.subscription_id
+plan_changes.csv,change_date,Date of upgrade/downgrade,
+plan_changes.csv,old_plan,Plan before change,
+plan_changes.csv,new_plan,Plan after change,
